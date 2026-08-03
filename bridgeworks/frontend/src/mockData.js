@@ -9,8 +9,6 @@ const fmt = (d) => d.toISOString().slice(0, 10);
 const daysAgo = (n) => { const d = new Date(today); d.setDate(d.getDate() - n); return fmt(d); };
 
 // ─── Team (6 people max, proper hierarchy) ───────────────────────────────────
-// Jatin = Founder, Arjun = Engineering Manager, Priya = Sales Manager,
-// Sneha = HR Manager, Rohit = Finance Staff, Divya = Design Worker
 const EMPLOYEES = [
   {
     id: 1, employee_id: 'BW-001',
@@ -140,8 +138,28 @@ const TRIAL_BALANCE = {
   total_credit: 10569500,
 };
 
+// PROFIT_LOSS — formatted with both object & array views for all components
 const PROFIT_LOSS = {
   period: 'July 2026',
+  total_income: 6405200,
+  total_expense: 1070250,
+  profit: 5334950,
+  net_profit: 5334950,
+  net_profit_margin: 83.3,
+  income: [
+    { ledger: 'Revenue - Software Licences', name: 'Revenue - Software Licences', amount: 4250000 },
+    { ledger: 'Revenue - Consulting Services', name: 'Revenue - Consulting Services', amount: 1180000 },
+    { ledger: 'Revenue - SaaS Subscriptions', name: 'Revenue - SaaS Subscriptions', amount: 890000 },
+    { ledger: 'Interest Income', name: 'Interest Income', amount: 85200 },
+  ],
+  expenses: [
+    { ledger: 'Salaries & Wages', name: 'Salaries & Wages', amount: 830000 },
+    { ledger: 'Rent & Utilities', name: 'Rent & Utilities', amount: 125000 },
+    { ledger: 'Advertising & Marketing', name: 'Advertising & Marketing', amount: 55000 },
+    { ledger: 'Cloud Infrastructure', name: 'Cloud Infrastructure', amount: 38000 },
+    { ledger: 'Depreciation', name: 'Depreciation', amount: 18750 },
+    { ledger: 'Bank Charges', name: 'Bank Charges', amount: 3500 },
+  ],
   revenue: {
     items: [
       { name: 'Revenue - Software Licences', amount: 4250000 },
@@ -151,52 +169,49 @@ const PROFIT_LOSS = {
     ],
     total: 6405200,
   },
-  expenses: {
-    items: [
-      { name: 'Salaries & Wages', amount: 830000 },
-      { name: 'Rent & Utilities', amount: 125000 },
-      { name: 'Advertising & Marketing', amount: 55000 },
-      { name: 'Cloud Infrastructure', amount: 38000 },
-      { name: 'Depreciation', amount: 18750 },
-      { name: 'Bank Charges', amount: 3500 },
-    ],
-    total: 1070250,
-  },
-  net_profit: 5334950,
-  net_profit_margin: 83.3,
 };
 
-// Balance sheet — flat arrays as expected by accounting-balance-sheet.jsx
+// BALANCE_SHEET — formatted with ledger & amount fields for both ReportsHub and BalanceSheet page
 const BALANCE_SHEET = {
   as_of: fmt(today),
-  assets: [
-    { ledger_id: 1, name: 'Cash & Bank Balances', balance: 2850000, children: [] },
-    { ledger_id: 2, name: 'Accounts Receivable', balance: 1245000, children: [] },
-    { ledger_id: 3, name: 'Inventory', balance: 385000, children: [] },
-    { ledger_id: 4, name: 'Property, Plant & Equipment', balance: 2720000, children: [
-      { ledger_id: 41, name: 'Office Equipment', balance: 1500000 },
-      { ledger_id: 42, name: 'Computers & Servers', balance: 1220000 },
-    ]},
-    { ledger_id: 5, name: 'Intangible Assets', balance: 650000, children: [] },
-  ],
-  liabilities: [
-    { ledger_id: 10, name: 'Accounts Payable', balance: 685000, children: [] },
-    { ledger_id: 11, name: 'Tax Payable', balance: 124500, children: [] },
-    { ledger_id: 12, name: 'Salaries Payable', balance: 97000, children: [] },
-    { ledger_id: 13, name: 'Long-term Borrowings', balance: 1800000, children: [] },
-  ],
-  equity: 6143500,
   total_assets: 7850000,
   total_liabilities: 2706500,
+  equity: 5143500,
+  assets: [
+    { ledger_id: 1, name: 'Cash & Bank Balances', ledger: 'Cash & Bank Balances', amount: 2850000, balance: 2850000, children: [] },
+    { ledger_id: 2, name: 'Accounts Receivable', ledger: 'Accounts Receivable', amount: 1245000, balance: 1245000, children: [] },
+    { ledger_id: 3, name: 'Inventory', ledger: 'Inventory', amount: 385000, balance: 385000, children: [] },
+    { ledger_id: 4, name: 'Property, Plant & Equipment', ledger: 'Property, Plant & Equipment', amount: 2720000, balance: 2720000, children: [] },
+    { ledger_id: 5, name: 'Intangible Assets', ledger: 'Intangible Assets', amount: 650000, balance: 650000, children: [] },
+  ],
+  liabilities: [
+    { ledger_id: 10, name: 'Accounts Payable', ledger: 'Accounts Payable', amount: 685000, balance: 685000, children: [] },
+    { ledger_id: 11, name: 'Tax Payable', ledger: 'Tax Payable', amount: 124500, balance: 124500, children: [] },
+    { ledger_id: 12, name: 'Salaries Payable', ledger: 'Salaries Payable', amount: 97000, balance: 97000, children: [] },
+    { ledger_id: 13, name: 'Long-term Borrowings', ledger: 'Long-term Borrowings', amount: 1800000, balance: 1800000, children: [] },
+  ],
 };
+
+const LEDGER_SUMMARY = [
+  { id: 1, ledger: 'Cash & Bank', account_name: 'Cash & Bank', type: 'Asset', total_debit: 5820000, total_credit: 2970000, balance: 2850000 },
+  { id: 2, ledger: 'Accounts Receivable', account_name: 'Accounts Receivable', type: 'Asset', total_debit: 1245000, total_credit: 0, balance: 1245000 },
+  { id: 3, ledger: 'Revenue - Software', account_name: 'Revenue - Software', type: 'Income', total_debit: 0, total_credit: 4250000, balance: 4250000 },
+  { id: 4, ledger: 'Salaries Expense', account_name: 'Salaries Expense', type: 'Expense', total_debit: 830000, total_credit: 0, balance: 830000 },
+  { id: 5, ledger: 'Rent Expense', account_name: 'Rent Expense', type: 'Expense', total_debit: 125000, total_credit: 0, balance: 125000 },
+];
 
 // ─── GST ─────────────────────────────────────────────────────────────────────
 const GST_DASHBOARD = {
   month: today.getMonth() + 1,
   year: today.getFullYear(),
+  collected: 768624,
+  paid: 312480,
   output_gst: 768624,
   input_credit: 312480,
   net_liability: 456144,
+  cgst: 384312,
+  sgst: 384312,
+  igst: 0,
   gstr1_filed: true,
   gstr3b_filed: false,
   itc_available: 312480,
@@ -308,9 +323,9 @@ const CHAT_MESSAGES = [
 ];
 
 const DIARY_ENTRIES = [
-  { id: 1, date: daysAgo(0), content: 'Focused on closing the MediCare renewal. Positive signals from their CTO.', mood: 'good' },
-  { id: 2, date: daysAgo(1), content: 'Reviewed Q3 financial projections with Rohit. Revenue outlook strong — on track for 28% growth.', mood: 'great' },
-  { id: 3, date: daysAgo(2), content: 'All-hands meeting. Team morale is high after the Series A announcement.', mood: 'great' },
+  { id: 1, title: 'Product Strategy Review', note: 'Met with lead engineers to review Q4 architecture roadmap.', hours: 4.0, date: daysAgo(0), entry_date: daysAgo(0), entry_type: 'work', mood: 'good', tags: ['strategy', 'product'] },
+  { id: 2, title: 'Client Onboarding Call', note: 'Demonstrated BridgeWorks platform to Medicare CTO.', hours: 3.5, date: daysAgo(1), entry_date: daysAgo(1), entry_type: 'meeting', mood: 'great', tags: ['client', 'sales'] },
+  { id: 3, title: 'Q3 Financial Audit', note: 'Reviewed P&L statement and tax filings with Rohit.', hours: 2.5, date: daysAgo(2), entry_date: daysAgo(2), entry_type: 'review', mood: 'great', tags: ['finance', 'audit'] },
 ];
 
 const NOTIFICATIONS = [
@@ -405,15 +420,7 @@ export const MOCK_ROUTES = [
     auto_match_rate: 94, review_queue_count: 3, avg_confidence: 87,
     unmatched_count: 3, high_risk_count: 1, duplicate_count: 1,
   }) },
-  { pattern: /\/api\/accounting\/ledger-summary/, data: () => ({
-    accounts: [
-      { account_name: 'Cash & Bank', debit_total: 5820000, credit_total: 2970000, balance: 2850000 },
-      { account_name: 'Accounts Receivable', debit_total: 1245000, credit_total: 0, balance: 1245000 },
-      { account_name: 'Revenue - Software', debit_total: 0, credit_total: 4250000, balance: 4250000 },
-      { account_name: 'Salaries Expense', debit_total: 830000, credit_total: 0, balance: 830000 },
-    ],
-  }) },
-  { pattern: /\/api\/accounting\/settlements/, data: () => ({ results: [], count: 0 }) },
+  { pattern: /\/api\/accounting\/ledger-summary/, data: () => LEDGER_SUMMARY },
 
   // ── Training Hub ──────────────────────────────────────────────────────────
   { pattern: /\/api\/hr\/training\/files/, data: () => TRAINING_FILES },
@@ -475,12 +482,24 @@ export const MOCK_ROUTES = [
   // ── GST ──────────────────────────────────────────────────────────────────
   { pattern: /\/api\/accounting\/gst\/dashboard/, data: () => GST_DASHBOARD },
   { pattern: /\/api\/accounting\/gst\/summary/, data: () => GST_DASHBOARD },
+  { pattern: /\/api\/accounting\/gst\/filing-history/, data: () => [
+    { return_type: 'GSTR-1', period: 'July 2026', filed_date: daysAgo(5), acknowledgement_number: 'ARN26071234567', filed_by: 'Rohit Verma' },
+    { return_type: 'GSTR-3B', period: 'June 2026', filed_date: daysAgo(35), acknowledgement_number: 'ARN26069876543', filed_by: 'Rohit Verma' },
+  ] },
   { pattern: /\/api\/accounting\/gst\/itc-reconciliation/, data: () => ({
     itc_claimed: 312480, itc_available: 312480, itc_utilized: 280000, itc_balance: 32480, mismatches: 1,
+    kpis: { eligible_itc: 312480, pending_itc: 15600, blocked_itc: 2100 },
+    reconciliation_status: {
+      records: [
+        { vendor: 'TechCorp Ltd', gstin: '29ABCDE1234F1Z5', invoice: 'INV-2401', gst_amount: 51300, eligibility: 'Eligible', status: 'Matched' },
+        { vendor: 'StartupX Pvt Ltd', gstin: '29ABCDE1235F1Z5', invoice: 'INV-2402', gst_amount: 31500, eligibility: 'Eligible', status: 'Matched' },
+        { vendor: 'GlobalRetail Inc', gstin: '29ABCDE1236F1Z5', invoice: 'INV-2403', gst_amount: 75600, eligibility: 'Eligible', status: 'Matched' },
+      ]
+    }
   }) },
   { pattern: /\/api\/accounting\/gst/, data: () => ({ results: GST_TRANSACTIONS, count: GST_TRANSACTIONS.length }) },
 
-  // ── HR / Employees ────────────────────────────────────────────────────────
+  // ── HR / Employees / Diary ────────────────────────────────────────────────
   { pattern: /\/api\/hr\/employees/, data: () => ({ results: EMPLOYEES, count: EMPLOYEES.length }) },
   { pattern: /\/api\/employees/, data: () => ({ results: EMPLOYEES, count: EMPLOYEES.length }) },
   { pattern: /\/api\/hr\/attendance/, data: () => ({ results: ATTENDANCE, count: ATTENDANCE.length }) },
@@ -488,6 +507,17 @@ export const MOCK_ROUTES = [
   { pattern: /\/api\/hr\/hiring/, data: () => ({ results: JOB_POSTINGS, count: JOB_POSTINGS.length }) },
   { pattern: /\/api\/hiring/, data: () => ({ results: JOB_POSTINGS, count: JOB_POSTINGS.length }) },
   { pattern: /\/api\/hr\/departments/, data: () => ({ results: DEPARTMENTS }) },
+  { pattern: /\/api\/hr\/diary\/logbooks/, data: () => ({
+    summary: { total_hours: 48.5, member_count: 6, total_entries: 12 },
+    members: EMPLOYEES,
+    entries: [
+      { id: 1, user_id: 1, user_name: 'Jatin Choudhary', user_email: 'jatin@bridgeworks.in', title: 'Product Strategy Review', note: 'Met with lead engineers to review Q4 architecture roadmap.', hours: 4.0, entry_date: daysAgo(0), entry_type: 'work', tags: ['strategy', 'product'] },
+      { id: 2, user_id: 2, user_name: 'Arjun Sharma', user_email: 'arjun@bridgeworks.in', title: 'Code Review & CI/CD Pipeline', note: 'Reviewed PRs and optimized GitHub Actions build time.', hours: 5.5, entry_date: daysAgo(0), entry_type: 'work', tags: ['devops', 'code'] },
+      { id: 3, user_id: 3, user_name: 'Priya Patel', user_email: 'priya@bridgeworks.in', title: 'Enterprise Client Demo', note: 'Demonstrated BridgeWorks platform to MediCare CTO.', hours: 3.5, entry_date: daysAgo(1), entry_type: 'meeting', tags: ['sales', 'demo'] },
+      { id: 4, user_id: 5, user_name: 'Rohit Verma', user_email: 'rohit@bridgeworks.in', title: 'Q3 Financial Audit & GST Filing', note: 'Reviewed P&L statement and prepared GSTR-3B summary.', hours: 6.0, entry_date: daysAgo(1), entry_type: 'review', tags: ['finance', 'gst'] },
+    ]
+  }) },
+  { pattern: /\/api\/diary\/entries/, data: () => DIARY_ENTRIES },
 
   // ── Workforce (MasterWorkforceSheet) ─────────────────────────────────────
   { pattern: /\/api\/workforce\/departments/, data: () => DEPARTMENTS.map(d => ({ id: d.id, name: d.name })) },
