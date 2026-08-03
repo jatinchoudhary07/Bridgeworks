@@ -18,6 +18,32 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import HubIcon from "@mui/icons-material/Hub";
 import "./styles/index.css";
 
+// ── Demo Mode Banner (shown when no backend is connected) ─────────────────────
+const IS_DEMO = !import.meta.env.VITE_API_URL;
+function DemoBanner() {
+  if (!IS_DEMO) return null;
+  return (
+    <Box
+      sx={{
+        bgcolor: "#fffbeb",
+        borderBottom: "1px solid #fcd34d",
+        py: 0.5,
+        px: 2,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 1,
+        fontSize: "0.75rem",
+      }}
+    >
+      <span style={{ fontSize: "0.9rem" }}>🎭</span>
+      <Typography variant="caption" sx={{ fontWeight: 700, color: "#92400e" }}>
+        Demo Mode — Sample data is shown. Connect a backend to enable live data.
+      </Typography>
+    </Box>
+  );
+}
+
 // ── Core module pages ────────────────────────────────────────────────────────
 import ModulesHub from "./pages/ModulesHub";
 import FinanceAccountingPage from "./pages/FinanceAccountingPage";
@@ -231,6 +257,7 @@ export default function App() {
         bgcolor: "background.default",
       }}
     >
+      <DemoBanner />
       <TopNav />
 
       <Box sx={{ flex: 1, overflow: "hidden", display: "flex", flexDirection: "column" }}>
