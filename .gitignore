@@ -1,13 +1,17 @@
+# Old legacy backup folder
+unify/
+
 # Node modules
 node_modules/
 **/node_modules/
 
 # Python Virtual Environments
 .venv*
-venv/
-env/
+**/venv/
+**/env/
 **/__pycache__/
 *.pyc
+*.pyd
 
 # Secrets & Environment
 .env
