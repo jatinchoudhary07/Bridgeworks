@@ -1,14 +1,5 @@
 # 🌐 BridgeWorks Enterprise Platform
 
-<div align="center">
-
-![BridgeWorks Hero](https://img.shields.io/badge/BridgeWorks-Enterprise%20Suite-0070f3?style=for-the-badge&logo=react&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3.13-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Django](https://img.shields.io/badge/Django-5.x-092E20?style=for-the-badge&logo=django&logoColor=white)
-![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)
-![Vite](https://img.shields.io/badge/Vite-7.x-646CFF?style=for-the-badge&logo=vite&logoColor=white)
-![MUI](https://img.shields.io/badge/Material--UI-v5-007FFF?style=for-the-badge&logo=mui&logoColor=white)
-
 ### **Built to Connect. Designed to Perform.**
 
 *An all-in-one unified enterprise platform combining Finance & Accounting, HR & Team Operations, and a Personal Desktop Workspace into a single, high-performance web suite.*
@@ -89,7 +80,7 @@ Make sure you have **Node.js (v18+)** and **Python 3.13+** installed on your sys
          ┌─────────────────────────────┼─────────────────────────────┐
          ▼                             ▼                             ▼
 ┌───────────────────┐        ┌───────────────────┐        ┌───────────────────┐
-│  🏦 FINANCE &     │        │    👥 HR & TEAM   │        │   🗂️ MY DESK      │
+│  🏦 FINANCE       │       │    👥 HR & TEAM   │        │  🗂️ MY DESK      │
 │     ACCOUNTING    │        │    OPERATIONS     │        │   PERSONAL WORKSPACE│
 └───────────────────┘        └───────────────────┘        └───────────────────┘
 ```
