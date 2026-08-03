@@ -80,8 +80,8 @@ Make sure you have **Node.js (v18+)** and **Python 3.13+** installed on your sys
          ┌─────────────────────────────┼─────────────────────────────┐
          ▼                             ▼                             ▼
 ┌───────────────────┐        ┌───────────────────┐        ┌───────────────────┐
-│  🏦 FINANCE       │       │    👥 HR & TEAM   │        │  🗂️ MY DESK      │
-│     ACCOUNTING    │        │    OPERATIONS     │        │   PERSONAL WORKSPACE│
+│  🏦 FINANCE       │       │    👥 HR & TEAM   │        │  🗂️ MY DESK       │
+│     ACCOUNTING    │        │    OPERATIONS     │        │ PERSONAL WORKSPACE│
 └───────────────────┘        └───────────────────┘        └───────────────────┘
 ```
 
