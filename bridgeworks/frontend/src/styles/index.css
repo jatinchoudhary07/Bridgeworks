@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --accountancy-midnight-ink: #0f172a;
+  --accountancy-cool-gray: #64748b;
+  --accountancy-trust-blue: #2563eb;
+  --accountancy-soft-border: #e2e8f0;
+  --accountancy-cloud-gray: #f8fafc;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  min-height: 100%;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+.text-midnight-ink {
+  color: var(--accountancy-midnight-ink);
+}
+
+.text-cool-gray {
+  color: var(--accountancy-cool-gray);
+}
+
+.text-trust-blue {
+  color: var(--accountancy-trust-blue);
+}
+
+.bg-cloud-gray {
+  background-color: var(--accountancy-cloud-gray);
+}
+
+.bg-cloud-gray\/40 {
+  background-color: rgba(248, 250, 252, 0.4);
+}
+
+.bg-cloud-gray\/50 {
+  background-color: rgba(248, 250, 252, 0.5);
+}
+
+.bg-trust-blue {
+  background-color: var(--accountancy-trust-blue);
+}
+
+.border-soft-border {
+  border-color: var(--accountancy-soft-border);
+}
+
+.border-trust-blue {
+  border-color: var(--accountancy-trust-blue);
+}
+
+.hover\:bg-cloud-gray:hover {
+  background-color: var(--accountancy-cloud-gray);
+}
+
+.hover\:bg-cloud-gray\/50:hover {
+  background-color: rgba(248, 250, 252, 0.5);
+}
+
+.hover\:border-trust-blue:hover {
+  border-color: var(--accountancy-trust-blue);
+}
+
+.hover\:text-midnight-ink:hover {
+  color: var(--accountancy-midnight-ink);
+}
+
+.hover\:bg-trust-blue:hover {
+  background-color: var(--accountancy-trust-blue);
+}
+
+.hover\:text-white:hover {
+  color: #ffffff;
+}
+
+.focus\:ring-trust-blue:focus {
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.32);
+}
+
+.focus\:ring-trust-blue\/30:focus {
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.3);
+}

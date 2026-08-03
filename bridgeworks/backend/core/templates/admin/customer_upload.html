@@ -1,0 +1,44 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+  <a href="{% url 'admin:index' %}">{% translate 'Home' %}</a>
+  &rsaquo; <a href="{% url 'admin:app_list' app_label='core' %}">Core</a>
+  &rsaquo; <a href="{% url 'admin:core_customer_changelist' %}">Customers</a>
+  &rsaquo; Upload Customers
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+  <h2>Upload Shopify Customers CSV</h2>
+  <p>Upload a Shopify Customers CSV export file to import or update customer records for a specific organization.</p>
+  
+  <form action="" method="post" enctype="multipart/form-data" style="margin-top: 20px;">
+    {% csrf_token %}
+    <div style="margin-bottom: 20px;">
+      <label for="id_org_id" style="display: block; margin-bottom: 8px; font-weight: bold; font-size: 14px;">Select Organization:</label>
+      {% if is_superuser %}
+        <select name="org_id" id="id_org_id" style="font-size: 14px; padding: 5px 10px; border-radius: 4px; border: 1px solid #ccc; width: 250px;">
+          {% for oid in org_ids %}
+            <option value="{{ oid }}" {% if oid == default_org_id %}selected{% endif %}>{{ oid }}</option>
+          {% endfor %}
+        </select>
+      {% else %}
+        <input type="text" name="org_id" id="id_org_id" value="{{ default_org_id }}" readonly style="font-size: 14px; padding: 5px 10px; border-radius: 4px; border: 1px solid #eee; background: #fafafa; width: 230px;">
+      {% endif %}
+    </div>
+
+    <div style="margin-bottom: 20px;">
+      <label for="id_file" style="display: block; margin-bottom: 8px; font-weight: bold; font-size: 14px;">Select Customers CSV File:</label>
+      <input type="file" name="file" id="id_file" accept=".csv" required style="font-size: 14px;">
+    </div>
+    
+    <div style="margin-top: 30px; display: flex; gap: 10px; align-items: center;">
+      <input type="submit" value="Upload and Process" class="default" style="background: #10B981; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 14px;">
+      <a href="{% url 'admin:core_customer_changelist' %}" style="display: inline-block; padding: 9px 20px; border: 1px solid #ccc; border-radius: 4px; color: #333; text-decoration: none; font-size: 14px; background: #eee;">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{
+  "name": "bridgeworks-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "BridgeWorks Enterprise Platform — Built to Connect. Designed to Perform.",
+  "scripts": {
+    "bridgeworks": "concurrently -n \"BACKEND,FRONTEND\" -c \"blue,green\" \"npm run backend\" \"npm run frontend\"",
+    "start": "npm run bridgeworks",
+    "dev": "npm run bridgeworks",
+    "backend": "cd backend && py -3.13 manage.py migrate && py -3.13 manage.py seed_local_dev && py -3.13 manage.py seed_dummy_data && py -3.13 manage.py runserver 8000",
+    "frontend": "cd frontend && npm run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

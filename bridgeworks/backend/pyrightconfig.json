@@ -1,0 +1,12 @@
+{
+  "venvPath": ".",
+  "venv": ".venv313",
+  "djangoSettings": "bridgeworks_backend.settings",
+  "pythonVersion": "3.13",
+  "pythonPlatform": "Windows",
+  "exclude": [
+    "**/node_modules",
+    "**/__pycache__",
+    "C:/__pyrefly_virtual__"
+  ]
+}

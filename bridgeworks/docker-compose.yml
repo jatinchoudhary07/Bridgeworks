@@ -1,0 +1,75 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - backend_media:/app/media
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+      - 1.1.1.1
+    restart: unless-stopped
+
+  # Background task worker (django-q2)
+  worker:
+    build: ./backend
+    command: python manage.py qcluster
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+      - 1.1.1.1
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  db:
+    image: postgres:16-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-bridgeworks}
+      POSTGRES_USER: ${POSTGRES_USER:-bridgeworks}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+
+    restart: unless-stopped
+
+  # Connection pooler — multiplexes 1000s of app connections to ~20 DB connections
+  pgbouncer:
+    image: edoburu/pgbouncer:latest
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:-bridgeworks}:${POSTGRES_PASSWORD:-changeme}@db:5432/${POSTGRES_DB:-bridgeworks}
+      POOL_MODE: transaction
+      MAX_CLIENT_CONN: 1000
+      DEFAULT_POOL_SIZE: 20
+
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  backend_media:

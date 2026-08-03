@@ -1,0 +1,31 @@
+# Node modules
+node_modules/
+**/node_modules/
+
+# Python Virtual Environments
+.venv*
+venv/
+env/
+**/__pycache__/
+*.pyc
+
+# Secrets & Environment
+.env
+*.env
+*.env.*
+!*.env.example
+*_backup.py
+settings_backup.py
+
+# Database & SQLite
+*.sqlite
+*.sqlite3
+*.db
+
+# Logs & OS
+*.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+C:/__pyrefly_virtual__/

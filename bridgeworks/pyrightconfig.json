@@ -1,0 +1,6 @@
+{
+  "venvPath": "backend",
+  "venv": "venv",
+  "djangoSettings": "bridgeworks_backend.settings",
+  "pythonPlatform": "Linux"
+}

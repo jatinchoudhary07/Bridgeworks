@@ -1,0 +1,129 @@
+# Secrets
+.env
+*.env
+*.env.*
+!.env.example
+
+# Sensitive data
+*.csv
+
+# Cloudinary
+cloudinary.env.*
+cloudinary.txt
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+venv/
+env/
+ENV/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Database
+db.sqlite3
+db.sqlite3-shm
+db.sqlite3-wal
+*.db
+*.sqlite
+*.sqlite3
+
+# Django
+*.log
+local_settings.py
+media/
+staticfiles/
+static_root/
+*.pyc
+
+# Backend specific
+backend/staticfiles/
+backend/media/
+backend/__pycache__/
+backend/*.pyc
+backend/db.sqlite3
+
+# Node
+node_modules/
+**/node_modules/
+
+# Frontend build
+frontend/dist/
+frontend/build/
+frontend/.vite/
+frontend/dist-ssr/
+frontend/*.local
+dist/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.code-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+coverage/
+
+# Misc
+*.bak
+*.tmp
+.cache/
+.turbo/
+.nyc_output/
+.parcel-cache/
+
+# Package manager
+.pnpm-store/
+
+# Production builds
+staticfiles/
+static_root/
+
+# Debug / scratch files
+backend/debug_*.py
+backend/debug_*.txt
+backend/tmp_*.py
+backend/tmp*.txt
+backend/fix_*.py
+backend/backfill_*.py
+backend/check_gap.py
+backend/scratch_*.txt
+backend/scratch_*.py
+backend/diff_*.txt
+backend/run_analysis_*.py
+backend/*_output.txt
+backend/*_transactions.txt
+backend/settings_backup.py
+# Antigravity scratches
+backend/scratch/
+backend/tmp/
+audit_report.md

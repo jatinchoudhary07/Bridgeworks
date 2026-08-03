@@ -1,0 +1,11 @@
+{
+  "name": "bridgeworks-root",
+  "version": "1.0.0",
+  "private": true,
+  "description": "BridgeWorks Enterprise Platform — Built to Connect. Designed to Perform.",
+  "scripts": {
+    "bridgeworks": "cd bridgeworks && npm run bridgeworks",
+    "start": "npm run bridgeworks",
+    "dev": "npm run bridgeworks"
+  }
+}
