@@ -102,17 +102,6 @@ Make sure you have **Node.js (v18+)** and **Python 3.13+** installed on your sys
 * **Task Manager**: Dynamic Kanban boards, priority tagging, and task assignment.
 * **Workspace Team Chat**: Public team channels (`#general`, `#finance`) and direct messaging.
 * **Work Diary & Expenses**: Personal daily logbook and employee expense claim reimbursements.
-
----
-
-## 🔐 Default Demo Credentials
-
-When launched via `npm run bridgeworks`, the platform automatically seeds default admin login credentials:
-
-* **Admin Email**: `admin@local.dev`
-* **Admin Password**: `localdev123`
-* **Admin User**: `Jatin Choudhary`
-
 ---
 
 ## 📜 Author & Credits
