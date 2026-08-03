@@ -36,7 +36,7 @@ function DemoBanner() {
         fontSize: "0.75rem",
       }}
     >
-      <span style={{ fontSize: "0.9rem" }}>🎭</span>
+      <span style={{ fontSize: "0.9rem", color: "#d97706" }}>●</span>
       <Typography variant="caption" sx={{ fontWeight: 700, color: "#92400e" }}>
         Demo Mode — Sample data is shown. Connect a backend to enable live data.
       </Typography>

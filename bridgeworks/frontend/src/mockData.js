@@ -349,10 +349,107 @@ export const MOCK_ROUTES = [
     bank_balance: 2850000,
     book_balance: 2835000,
     difference: 15000,
+    auto_match_rate: 94,
+    review_queue_count: 8,
+    avg_confidence: 87,
+    unmatched_count: 8,
+    high_risk_count: 1,
+    duplicate_count: 2,
+  }) },
+
+  { pattern: /\/api\/accounting\/ledger-summary/, data: () => ({
+    accounts: [
+      { account_name: 'Cash & Bank', debit_total: 5820000, credit_total: 2970000, balance: 2850000 },
+      { account_name: 'Accounts Receivable', debit_total: 1245000, credit_total: 0, balance: 1245000 },
+      { account_name: 'Revenue - Software', debit_total: 0, credit_total: 4250000, balance: 4250000 },
+      { account_name: 'Salaries Expense', debit_total: 2940000, credit_total: 0, balance: 2940000 },
+      { account_name: 'Rent Expense', debit_total: 750000, credit_total: 0, balance: 750000 },
+    ],
+  }) },
+
+  // ── Finance Control Tower (main dashboard) ───────────────────────────────
+  { pattern: /\/api\/finance\/control-tower/, data: () => ({
+    cashPosition: 2850000,
+    receivables: 1245000,
+    payables: 685000,
+    gstLiability: 456144,
+    gstDueDays: 5,
+    payrollPending: false,
+    payrollTotal: 980000,
+    eolAssets: 1,
+    expensesGrowth: 4.2,
+    incomeGrowth: 8.7,
+    netWorth: 5459500,
+    monthlyBurn: 798417,
+    reconciliationAccuracy: 94,
+    pendingMatches: 8,
+    connectedAccounts: 3,
+    dailyInflow: 213507,
+    dailyOutflow: 159683,
+    totalAssets: 9095000,
+    assetHealth: 92,
+    revenue: 6405200,
+    profit: 1614700,
+    forecastAccuracy: 100,
+    decisions: [
+      { id: 1, title: 'Approve Q4 Engineering Hiring Budget', amount: 4500000, priority: 'High', status: 'Pending' },
+      { id: 2, title: 'Renew AWS Reserved Instance Contract', amount: 228000, priority: 'Medium', status: 'Pending' },
+    ],
+    actions: [
+      { id: 1, text: 'File GSTR-3B before August 20', type: 'Compliance', priority: 'Critical', time: '5 days' },
+      { id: 2, text: 'Approve 2 pending expense claims', type: 'Finance', priority: 'Medium', time: 'Today' },
+      { id: 3, text: 'Review 8 unmatched bank transactions', type: 'Banking', priority: 'High', time: 'This week' },
+    ],
+    timelineGroups: {
+      TODAY: [
+        { id: 1, text: 'Invoice INV-2405 created — ₹5,10,000', type: 'Finance', time: '11:42 AM' },
+        { id: 2, text: 'GST dashboard refreshed', type: 'Compliance', time: '10:05 AM' },
+      ],
+      YESTERDAY: [
+        { id: 3, text: 'July payroll processed — ₹9,80,000', type: 'Finance', time: '10:00 AM' },
+        { id: 4, text: 'Bank statement imported — HDFC Current', type: 'Banking', time: '09:30 AM' },
+      ],
+      'PAST WEEK': [
+        { id: 5, text: 'GSTR-1 filed for July 2026', type: 'Compliance', time: 'Mon 4:00 PM' },
+        { id: 6, text: 'Trial balance verified', type: 'Finance', time: 'Mon 2:15 PM' },
+      ],
+    },
+    infraSystems: [
+      { name: 'Banking & Reconciliation', health: 94, risk: 'Low', alerts: 0 },
+      { name: 'GST Compliance Engine', health: 87, risk: 'Medium', alerts: 1 },
+      { name: 'Payroll Processing', health: 100, risk: 'Low', alerts: 0 },
+      { name: 'Asset Management', health: 82, risk: 'Medium', alerts: 1 },
+      { name: 'Journal & Ledger', health: 98, risk: 'Low', alerts: 0 },
+    ],
+    accounts: [
+      { id: 1, name: 'HDFC Current Account', bank: 'HDFC Bank', balance: 1850000, last_sync: 'Just now' },
+      { id: 2, name: 'ICICI Savings Account', bank: 'ICICI Bank', balance: 720000, last_sync: '15 min ago' },
+      { id: 3, name: 'SBI Business Account', bank: 'State Bank of India', balance: 280000, last_sync: '30 min ago' },
+    ],
+  }) },
+
+  { pattern: /\/api\/finance\/executive-report/, data: () => ({
+    report: `# CFO Executive Report — ${new Date().toLocaleDateString('en-IN', { month: 'long', year: 'numeric' })}\n\n## Financial Summary\n\n**Revenue:** ₹64,05,200 | **Expenses:** ₹47,90,500 | **Net Profit:** ₹16,14,700 (25.2% margin)\n\n## Key Highlights\n- Revenue grew **8.7% MoM** driven by enterprise software licences\n- Salaries remain the largest cost at ₹29,40,000 (61.4% of expenses)\n- Cash position healthy at ₹28,50,000 with **3.6 months runway**\n- GSTR-3B due in 5 days — ₹4,56,144 payable\n\n## Recommendations\n1. Accelerate receivables collection — ₹12,45,000 outstanding\n2. Review AWS costs — potential 20% reduction via reserved instances\n3. Hire 5 engineers in Q4 to support product roadmap`,
+  }) },
+
+  { pattern: /\/api\/finance\/financial-plan/, data: () => ({
+    plan: `# 90-Day Financial Plan\n\n## Month 1 (August 2026)\n- **Target Revenue:** ₹70,00,000\n- File GSTR-3B by Aug 20\n- Close 2 pending enterprise deals\n\n## Month 2 (September 2026)\n- **Target Revenue:** ₹75,00,000\n- Begin Q4 engineering hiring\n- AWS reserved instance contract renewal\n\n## Month 3 (October 2026)\n- **Target Revenue:** ₹82,00,000\n- Series A deployment planning\n- Tier-2 city market expansion begins`,
+  }) },
+
+  { pattern: /\/api\/finance\/ai-chat/, data: () => ({
+    reply: 'This is a demo mode response. Connect the backend API to enable live AI-powered financial analysis.',
   }) },
 
   // ── GST ─────────────────────────────────────────────────────────────────
   { pattern: /\/api\/accounting\/gst\/dashboard/, data: () => GST_DASHBOARD },
+  { pattern: /\/api\/accounting\/gst\/summary/, data: () => GST_DASHBOARD },
+  { pattern: /\/api\/accounting\/gst\/itc-reconciliation/, data: () => ({
+    itc_claimed: 312480,
+    itc_available: 312480,
+    itc_utilized: 280000,
+    itc_balance: 32480,
+    mismatches: 2,
+  }) },
   { pattern: /\/api\/accounting\/gst/, data: () => ({ results: GST_TRANSACTIONS, count: GST_TRANSACTIONS.length }) },
 
   // ── HR / Employees ───────────────────────────────────────────────────────
