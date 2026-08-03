@@ -471,6 +471,69 @@ export const MOCK_ROUTES = [
     ],
   }) },
 
+  // ── Workforce (MasterWorkforceSheet uses these directly) ─────────────────
+  { pattern: /\/api\/workforce\/departments/, data: () => [
+    { id: 1, name: 'Engineering' },
+    { id: 2, name: 'Sales' },
+    { id: 3, name: 'HR' },
+    { id: 4, name: 'Marketing' },
+    { id: 5, name: 'Finance' },
+    { id: 6, name: 'Operations' },
+    { id: 7, name: 'Design' },
+  ] },
+  { pattern: /\/api\/workforce\/members/, data: () => EMPLOYEES.map(emp => ({
+    ...emp,
+    full_name: emp.name,
+    role: emp.designation,
+    working_style: emp.id % 2 === 0 ? 'Remote' : 'Office',
+    gender: emp.id % 3 === 0 ? 'Female' : 'Male',
+    category: 'Full-time',
+    archived: false,
+  })) },
+  { pattern: /\/api\/workforce\/documents/, data: () => [] },
+
+  // ── Team (used alongside workforce) ──────────────────────────────────────
+  { pattern: /\/api\/team\/members/, data: () => EMPLOYEES.map(emp => ({
+    id: emp.id,
+    full_name: emp.name,
+    username: emp.name.toLowerCase().replace(' ', '.'),
+    email: emp.email,
+    department: emp.department,
+    role: emp.designation,
+    status: emp.status,
+    working_style: emp.id % 2 === 0 ? 'Remote' : 'Office',
+    gender: emp.id % 3 === 0 ? 'Female' : 'Male',
+    category: 'Full-time',
+    phone: emp.phone,
+    location: emp.location,
+    joining_date: emp.joining_date,
+    archived: false,
+  })) },
+
+  // ── Auth / Current User / Permissions ────────────────────────────────────
+  { pattern: /\/api\/current-user/, data: () => ({
+    id: 1,
+    full_name: 'Jatin Choudhary',
+    username: 'admin',
+    email: 'admin@local.dev',
+    is_staff: true,
+    is_superuser: true,
+    department: 'Engineering',
+    role: 'Administrator',
+    organisation: { id: 1, name: 'BridgeWorks Demo Org', gstin: '29AABCB1234C1ZV' },
+  }) },
+  { pattern: /\/api\/permissions\/schema/, data: () => ({
+    modules: ['finance', 'hr', 'mydesk', 'reports', 'settings'],
+    actions: ['view', 'create', 'edit', 'delete', 'approve'],
+    roles: ['Admin', 'Manager', 'Staff', 'Viewer'],
+  }) },
+  { pattern: /\/api\/team\/permissions/, data: () => ({
+    permissions: { finance: ['view', 'edit'], hr: ['view', 'edit'], mydesk: ['view', 'edit', 'create'] },
+  }) },
+  { pattern: /\/api\/workforce\/permissions/, data: () => ({
+    permissions: { finance: ['view', 'edit'], hr: ['view', 'edit'], mydesk: ['view', 'edit', 'create'] },
+  }) },
+
   // ── My Desk ──────────────────────────────────────────────────────────────
   { pattern: /\/api\/mydesk\/notes/, data: () => NOTES },
   { pattern: /\/api\/mydesk\/tasks/, data: () => KANBAN_TASKS },
