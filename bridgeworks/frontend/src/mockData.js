@@ -320,17 +320,59 @@ const NOTIFICATIONS = [
 ];
 
 const DEPARTMENTS = [
-  { id: 1, name: 'Leadership', head: 'Jatin Choudhary', headcount: 1, budget: 3000000, spent: 2500000 },
-  { id: 2, name: 'Engineering', head: 'Arjun Sharma', headcount: 1, budget: 2000000, spent: 1450000 },
-  { id: 3, name: 'Sales', head: 'Priya Patel', headcount: 1, budget: 1500000, spent: 1250000 },
-  { id: 4, name: 'HR', head: 'Sneha Iyer', headcount: 1, budget: 1200000, spent: 980000 },
-  { id: 5, name: 'Finance', head: 'Rohit Verma', headcount: 1, budget: 1000000, spent: 780000 },
-  { id: 6, name: 'Design', head: 'Divya Krishnan', headcount: 1, budget: 1200000, spent: 950000 },
+  { id: 1, name: 'Leadership & Strategy', head: 'Jatin Choudhary', headcount: 1, budget: 3000000, spent: 2500000, income: 6405200, expense: 2500000, total_entries: 15 },
+  { id: 2, name: 'Software Engineering', head: 'Arjun Sharma', headcount: 1, budget: 2000000, spent: 1450000, income: 175000, expense: 1450000, total_entries: 10 },
+  { id: 3, name: 'Sales & Growth', head: 'Priya Patel', headcount: 1, budget: 1500000, spent: 1250000, income: 4250000, expense: 1250000, total_entries: 12 },
+  { id: 4, name: 'People & Operations', head: 'Sneha Iyer', headcount: 1, budget: 1200000, spent: 980000, income: 0, expense: 980000, total_entries: 6 },
+  { id: 5, name: 'Finance & Accounting', head: 'Rohit Verma', headcount: 1, budget: 1000000, spent: 780000, income: 85200, expense: 780000, total_entries: 8 },
+  { id: 6, name: 'Branding & Creative', head: 'Divya Krishnan', headcount: 1, budget: 1200000, spent: 950000, income: 0, expense: 950000, total_entries: 5 },
+];
+
+// Training Hub Data
+const TRAINING_FILES = [
+  { id: 1, title: 'BridgeWorks Platform Onboarding Guide', category: 'onboarding', department_name: 'All', file_type: 'pdf', created_at: daysAgo(10), version: 1, uploader_name: 'Sneha Iyer' },
+  { id: 2, title: 'GST & Statutory Compliance SOP 2026', category: 'compliance', department_name: 'Finance', file_type: 'pdf', created_at: daysAgo(15), version: 2, uploader_name: 'Rohit Verma' },
+  { id: 3, title: 'Engineering Code Review & CI/CD Guidelines', category: 'skills', department_name: 'Engineering', file_type: 'doc', created_at: daysAgo(20), version: 1, uploader_name: 'Arjun Sharma' },
+  { id: 4, title: 'Enterprise B2B Sales Playbook', category: 'sops', department_name: 'Sales', file_type: 'ppt', created_at: daysAgo(25), version: 1, uploader_name: 'Priya Patel' },
 ];
 
 // ─── URL Routing Map ──────────────────────────────────────────────────────────
 export const MOCK_ROUTES = [
   // ── Finance / Accounting ─────────────────────────────────────────────────
+  { pattern: /\/api\/accounting\/finance-dashboard/, data: () => ({
+    success: true,
+    data: { total_income: 6405200, total_expense: 1070250, net: 5334950 }
+  }) },
+  { pattern: /\/api\/accounting\/income/, data: () => ({
+    success: true,
+    data: FINANCE_TRANSACTIONS.filter(t => t.type === 'credit')
+  }) },
+  { pattern: /\/api\/accounting\/expenses/, data: () => ({
+    success: true,
+    data: FINANCE_TRANSACTIONS.filter(t => t.type === 'debit')
+  }) },
+  { pattern: /\/api\/accounting\/outstandings\/dashboard/, data: () => ({
+    success: true,
+    data: { total_receivable: 1245000, total_payable: 685000 }
+  }) },
+  { pattern: /\/api\/accounting\/ledgers/, data: () => [
+    { id: 1, name: 'Revenue - Software', type: 'Income' },
+    { id: 2, name: 'Revenue - Consulting', type: 'Income' },
+    { id: 3, name: 'Salaries & Wages', type: 'Expense' },
+    { id: 4, name: 'Rent & Utilities', type: 'Expense' },
+    { id: 5, name: 'Cloud Infrastructure', type: 'Expense' }
+  ] },
+  { pattern: /\/api\/accounting\/accounts/, data: () => [
+    { id: 1, name: 'HDFC Bank - Primary Current', type: 'Bank' },
+    { id: 2, name: 'ICICI Bank - Reserve Account', type: 'Bank' },
+    { id: 3, name: 'Petty Cash Account', type: 'Cash' }
+  ] },
+  { pattern: /\/api\/accounting\/departments\/transactions/, data: () => FINANCE_TRANSACTIONS },
+  { pattern: /\/api\/accounting\/departments/, data: () => ({
+    success: true,
+    data: DEPARTMENTS
+  }) },
+  { pattern: /\/api\/accounting\/department/, data: () => ({ departments: DEPARTMENTS }) },
   { pattern: /\/api\/accounting\/transactions/, data: () => FINANCE_TRANSACTIONS },
   { pattern: /\/api\/accounting\/journals/, data: () => ({ results: JOURNAL_ENTRIES, count: JOURNAL_ENTRIES.length }) },
   { pattern: /\/api\/accounting\/trial-balance/, data: () => TRIAL_BALANCE },
@@ -354,11 +396,9 @@ export const MOCK_ROUTES = [
     recent_transactions: FINANCE_TRANSACTIONS.slice(0, 5),
   }) },
   { pattern: /\/api\/accounting\/invoices/, data: () => ({ results: FINANCE_TRANSACTIONS.filter(t => t.type === 'credit'), count: 5 }) },
-  { pattern: /\/api\/accounting\/expenses/, data: () => PENDING_EXPENSES },
   { pattern: /\/api\/accounting\/assets/, data: () => ({ results: ASSETS, count: ASSETS.length }) },
   { pattern: /\/api\/accounting\/payroll/, data: () => ({ results: PAYROLL_RUNS, count: PAYROLL_RUNS.length, total_gross: 830000, total_net: 697000 }) },
   { pattern: /\/api\/accounting\/pending-expenses/, data: () => PENDING_EXPENSES },
-  { pattern: /\/api\/accounting\/department/, data: () => ({ departments: DEPARTMENTS }) },
   { pattern: /\/api\/accounting\/reconciliation/, data: () => ({
     matched: 47, unmatched: 3, total: 50,
     bank_balance: 2850000, book_balance: 2840000, difference: 10000,
@@ -374,6 +414,14 @@ export const MOCK_ROUTES = [
     ],
   }) },
   { pattern: /\/api\/accounting\/settlements/, data: () => ({ results: [], count: 0 }) },
+
+  // ── Training Hub ──────────────────────────────────────────────────────────
+  { pattern: /\/api\/hr\/training\/files/, data: () => TRAINING_FILES },
+  { pattern: /\/api\/hr\/training\/pushes/, data: () => [] },
+  { pattern: /\/api\/hr\/training\/my-assignments/, data: () => [] },
+  { pattern: /\/api\/hr\/training\/compliance/, data: () => ({
+    overall_compliance: 100, total_assigned: 6, total_completed: 6, pending_count: 0, compliance_by_department: []
+  }) },
 
   // ── Finance Control Tower ─────────────────────────────────────────────────
   { pattern: /\/api\/finance\/control-tower/, data: () => ({
@@ -486,6 +534,7 @@ export const MOCK_ROUTES = [
   // ── My Desk ───────────────────────────────────────────────────────────────
   { pattern: /\/api\/mydesk\/notes/, data: () => NOTES },
   { pattern: /\/api\/mydesk\/tasks/, data: () => KANBAN_TASKS },
+  { pattern: /\/api\/mydesk\/todos/, data: () => [] },
   { pattern: /\/api\/mydesk\/diary/, data: () => DIARY_ENTRIES },
   { pattern: /\/api\/mydesk\/expenses/, data: () => PENDING_EXPENSES },
   { pattern: /\/api\/mydesk\/chat/, data: () => CHAT_MESSAGES },
@@ -494,6 +543,7 @@ export const MOCK_ROUTES = [
     role: 'Founder & CEO', department: 'Leadership',
     phone: '+91 98765 00001', location: 'Bangalore',
   }) },
+  { pattern: /\/api\/postits/, data: () => [] },
 
   // ── Notifications & Activity ──────────────────────────────────────────────
   { pattern: /\/api\/notifications/, data: () => NOTIFICATIONS },
@@ -509,7 +559,7 @@ export const MOCK_ROUTES = [
   })) },
 
   // ── Catch-all ─────────────────────────────────────────────────────────────
-  { pattern: /.*/, data: () => ({ results: [], count: 0, success: true }) },
+  { pattern: /.*/, data: () => [] },
 ];
 
 export function getMockData(url) {
@@ -519,5 +569,5 @@ export function getMockData(url) {
       return route.data();
     }
   }
-  return { results: [], count: 0 };
+  return [];
 }
